@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Encoder.h>
 
-// #define ENC_DEBUG
+//#define ENC_DEBUG
 
 Encoder::Encoder(Joystick_* joystick, int joystickButton1, int joystickButton2, Adafruit_MCP23017* mcp, int mcpPin1, int mcpPin2):
   _joystick(joystick),
@@ -31,6 +31,7 @@ void Encoder::setState(int mcpPin, uint8_t pinInputState) {
 
   if(res == DIR_CW) {
     _joystick->pressButton(_jButtonNumber1);
+    delay(50);
     _joystick->releaseButton(_jButtonNumber1);
 #ifdef ENC_DEBUG
     Serial.print("Encoder: J Btn ");
@@ -38,6 +39,7 @@ void Encoder::setState(int mcpPin, uint8_t pinInputState) {
 #endif
   } else if(res == DIR_CCW) {
     _joystick->pressButton(_jButtonNumber2);
+    delay(50);
     _joystick->releaseButton(_jButtonNumber2);
 #ifdef ENC_DEBUG
     Serial.print("Encoder: J Btn ");

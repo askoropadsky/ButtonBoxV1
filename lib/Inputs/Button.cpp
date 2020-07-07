@@ -10,17 +10,8 @@ Button::Button(Joystick_* joystick, int joystickButton, Adafruit_MCP23017* mcp, 
   reportStateAfterMillis(0) {
 }
 
-//todo: add debounce logic
 void Button::setState(int mcpPin, uint8_t state) {
   if(mcpPin != _mcpPin) return;
-
-  // if(state == PIN_INPUT_PRESSED) {
-  //   Serial.print("--< Joystick button ");
-  //   Serial.print(_jButtonNumber);
-  //   Serial.print(" ");
-  //   Serial.println(state);
-  // }
-  //_joystick->setButton(_jButtonNumber, val);
 
   _state = state;
   reportStateAfterMillis = millis() + debounceDelay;
@@ -43,10 +34,5 @@ void Button::debounceTick() {
     int val = 0;
     if(_state == PIN_INPUT_PRESSED) val = 1;
     _joystick->setButton(_jButtonNumber, val);
-
-    // Serial.print("--> Joystick button ");
-    // Serial.print(_jButtonNumber);
-    // Serial.print(" ");
-    // Serial.println(val);
   }
 }
